@@ -5,96 +5,60 @@ import admission.director.AdmissionDirector;
 import admission.product.AdmissionApplication;
 
 public class Main {
-
     public static void main(String[] args) {
-
         AdmissionDirector director = new AdmissionDirector();
 
-        System.out.println("==================================================");
-        System.out.println("1. DEMO: Building via Director (Predefined Scenarios)");
-        System.out.println("==================================================");
+        AdmissionApplication app1 = director.constructInternationalAdmission(new ApplicationBuilder());
 
-        AdmissionApplication intlApp =
-                director.constructInternationalMaster(
-                        new ApplicationBuilder()
-                );
+        System.out.println("1. International admission");
+        System.out.println("Type: " + app1.getType());
+        System.out.println("Applicant: " + app1.getApplicantName());
+        System.out.println("Degree: " + app1.getDegreeLevel());
+        System.out.println("Major: " + app1.getMajor());
+        System.out.println("GPA: " + app1.getGpa());
+        System.out.println("Passport: " + app1.getPassportNumber() + " (" + app1.getCitizenship() + ")");
+        System.out.println("Language: " + app1.getLanguageTestType() + " " + app1.getLanguageScore());
+        System.out.println("Status: " + app1.getStatus());
 
-        System.out.println(intlApp);
+        AdmissionApplication app2 = director.constructAcademicMobility(new ApplicationBuilder());
 
-        AdmissionApplication mobilityApp =
-                director.constructAcademicMobilityBachelor(
-                        new ApplicationBuilder()
-                );
+        System.out.println("\n2. Academic mobility");
+        System.out.println("Type: " + app2.getType());
+        System.out.println("Applicant: " + app2.getApplicantName());
+        System.out.println("Student ID: " + app2.getStudentId());
+        System.out.println("Degree: " + app2.getDegreeLevel());
+        System.out.println("Major: " + app2.getMajor());
+        System.out.println("GPA: " + app2.getGpa());
+        System.out.println("Language: " + app2.getLanguageTestType() + " " + app2.getLanguageScore());
+        System.out.println("Host University: " + app2.getHostUniversity());
+        System.out.println("Semesters: " + app2.getMobilitySemesters());
+        System.out.println("Agreement Signed: " + app2.isLearningAgreementSigned());
+        System.out.println("Status: " + app2.getStatus());
 
-        System.out.println(mobilityApp);
+        AdmissionApplication app3 = director.constructVacantGrant(new ApplicationBuilder());
 
-        AdmissionApplication grantApp =
-                director.constructVacantGrantApplicant(
-                        new ApplicationBuilder()
-                );
+        System.out.println("\n3. Vacant grant");
+        System.out.println("Type: " + app3.getType());
+        System.out.println("Applicant: " + app3.getApplicantName());
+        System.out.println("Student ID: " + app3.getStudentId());
+        System.out.println("Degree: " + app3.getDegreeLevel());
+        System.out.println("Major: " + app3.getMajor());
+        System.out.println("GPA: " + app3.getGpa());
+        System.out.println("Applying for Vacant Grant: " + app3.isApplyingForVacantGrant());
+        System.out.println("Has Disciplinary Records: " + app3.hasDisciplinaryRecords());
+        System.out.println("Status: " + app3.getStatus());
 
-        System.out.println(grantApp);
+        AdmissionApplication app4 = new ApplicationBuilder()
+                .setApplicationType(AdmissionApplication.ApplicationType.INTERNATIONAL_ADMISSION)
+                .setApplicantName("Sophia Chen")
+                .setAcademicInfo(AdmissionApplication.DegreeLevel.BACHELOR, "Cybersecurity", 3.85)
+                .setPassport("E9876543", "China")
+                .setLanguageCertificate("IELTS", 7.5)
+                .build();
 
-        System.out.println("==================================================");
-        System.out.println("2. DEMO: Custom Building via Builder directly");
-        System.out.println("==================================================");
-
-        AdmissionApplication customPhd =
-                new ApplicationBuilder()
-                        .setPersonalDetails(
-                                "Aisulu",
-                                "Saparova"
-                        )
-                        .setAcademicInfo(
-                                AdmissionApplication.DegreeLevel.PHD,
-                                "Cybersecurity",
-                                3.85
-                        )
-                        .setInternationalDetails(
-                                8.0,
-                                "K87654321"
-                        )
-                        .build();
-
-        System.out.println(customPhd);
-
-        System.out.println("==================================================");
-        System.out.println("3. DEMO: Validated Construction (Clean Code Test)");
-        System.out.println("==================================================");
-
-        try {
-
-            System.out.println(
-                    "Attempting to apply for vacant grant with GPA 3.2 " +
-                            "(Min required: 3.5)..."
-            );
-
-            AdmissionApplication invalidGrantApp =
-                    new ApplicationBuilder()
-                            .setPersonalDetails(
-                                    "Dias",
-                                    "Nurlybek"
-                            )
-                            .setInternalStudentDetails(
-                                    "ST2024-0012"
-                            )
-                            .setAcademicInfo(
-                                    AdmissionApplication.DegreeLevel.BACHELOR,
-                                    "Software Engineering",
-                                    3.2
-                            )
-                            .setVacantGrantDetails(
-                                    "ST2024-0012",
-                                    false
-                            )
-                            .build();
-
-        } catch (IllegalStateException e) {
-
-            System.out.println(
-                    "SUCCESSFULLY CAUGHT VALIDATION ERROR: "
-                            + e.getMessage()
-            );
-        }
+        System.out.println("\n4. Custom Direct Fluent API Application");
+        System.out.println("Applicant: " + app4.getApplicantName());
+        System.out.println("Major: " + app4.getMajor() + " (GPA: " + app4.getGpa() + ")");
+        System.out.println("Status: " + app4.getStatus());
     }
 }

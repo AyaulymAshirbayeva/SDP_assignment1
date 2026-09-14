@@ -1,8 +1,12 @@
 package admission.product;
 
-import admission.builder.ApplicationBuilder;
-
 public class AdmissionApplication {
+
+    public enum ApplicationType {
+        INTERNATIONAL_ADMISSION,
+        ACADEMIC_MOBILITY,
+        VACANT_GRANT
+    }
 
     public enum DegreeLevel {
         BACHELOR,
@@ -10,62 +14,118 @@ public class AdmissionApplication {
         PHD
     }
 
-    private final String firstName;
-    private final String lastName;
+    private final ApplicationType type;
+    private final String applicantName;
+    private final String studentId;
     private final DegreeLevel degreeLevel;
     private final String major;
     private final double gpa;
 
-    private final String studentId;
-
-    // International
-    private final Double ieltsScore;
+    // international
     private final String passportNumber;
+    private final String citizenship;
+    private final String languageTestType;
+    private final double languageScore;
 
-    // Academic Mobility
+    // mobility program
     private final String hostUniversity;
-    private final Integer mobilitySemesters;
+    private final int mobilitySemesters;
     private final boolean isLearningAgreementSigned;
 
-    // Vacant Grant
+    // vacant grant
+    private final boolean isApplyingForVacantGrant;
     private final boolean hasDisciplinaryRecords;
 
-    public AdmissionApplication(ApplicationBuilder builder) {
-        this.firstName = builder.getFirstName();
-        this.lastName = builder.getLastName();
-        this.degreeLevel = builder.getDegreeLevel();
-        this.major = builder.getMajor();
-        this.gpa = builder.getGpa();
-        this.studentId = builder.getStudentId();
-        this.ieltsScore = builder.getIeltsScore();
-        this.passportNumber = builder.getPassportNumber();
-        this.hostUniversity = builder.getHostUniversity();
-        this.mobilitySemesters = builder.getMobilitySemesters();
-        this.isLearningAgreementSigned = builder.isLearningAgreementSigned();
-        this.hasDisciplinaryRecords = builder.hasDisciplinaryRecords();
+    private String status = "SUBMITTED";
+
+    public AdmissionApplication(ApplicationType type, String applicantName, String studentId,
+                                DegreeLevel degreeLevel, String major, double gpa,
+                                String passportNumber, String citizenship,
+                                String languageTestType, double languageScore,
+                                String hostUniversity, int mobilitySemesters, boolean isLearningAgreementSigned,
+                                boolean isApplyingForVacantGrant, boolean hasDisciplinaryRecords) {
+        this.type = type;
+        this.applicantName = applicantName;
+        this.studentId = studentId;
+        this.degreeLevel = degreeLevel;
+        this.major = major;
+        this.gpa = gpa;
+        this.passportNumber = passportNumber;
+        this.citizenship = citizenship;
+        this.languageTestType = languageTestType;
+        this.languageScore = languageScore;
+        this.hostUniversity = hostUniversity;
+        this.mobilitySemesters = mobilitySemesters;
+        this.isLearningAgreementSigned = isLearningAgreementSigned;
+        this.isApplyingForVacantGrant = isApplyingForVacantGrant;
+        this.hasDisciplinaryRecords = hasDisciplinaryRecords;
     }
 
-    @Override
-    public String toString() {
-        return "AdmissionApplication {\n" +
-                "  Name: " + firstName + " " + lastName +
-                (studentId != null ? " (ID: " + studentId + ")" : "") + "\n" +
-                "  Degree: " + degreeLevel +
-                " | Major: " + major +
-                " | GPA: " + gpa + "\n" +
-                (ieltsScore != null
-                        ? "  IELTS: " + ieltsScore +
-                        " | Passport: " + passportNumber + "\n"
-                        : "") +
-                (hostUniversity != null
-                        ? "  Mobility Host: " + hostUniversity +
-                        " (" + mobilitySemesters +
-                        " sem) | Learning Agreement: " +
-                        isLearningAgreementSigned + "\n"
-                        : "") +
-                (hasDisciplinaryRecords
-                        ? "  Disciplinary Warning: YES\n"
-                        : "") +
-                '}';
+    public ApplicationType getType() {
+        return type;
+    }
+
+    public String getApplicantName() {
+        return applicantName;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public DegreeLevel getDegreeLevel() {
+        return degreeLevel;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public String getCitizenship() {
+        return citizenship;
+    }
+
+    public String getLanguageTestType() {
+        return languageTestType;
+    }
+
+    public double getLanguageScore() {
+        return languageScore;
+    }
+
+    public String getHostUniversity() {
+        return hostUniversity;
+    }
+
+    public int getMobilitySemesters() {
+        return mobilitySemesters;
+    }
+
+    public boolean isLearningAgreementSigned() {
+        return isLearningAgreementSigned;
+    }
+
+    public boolean isApplyingForVacantGrant() {
+        return isApplyingForVacantGrant;
+    }
+
+    public boolean hasDisciplinaryRecords() {
+        return hasDisciplinaryRecords;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
