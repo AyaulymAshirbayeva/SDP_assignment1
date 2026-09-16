@@ -46,18 +46,5 @@ public class Main {
         System.out.println("Applying for Vacant Grant: " + app3.isApplyingForVacantGrant());
         System.out.println("Has Disciplinary Records: " + app3.hasDisciplinaryRecords());
         System.out.println("Status: " + app3.getStatus());
-
-        AdmissionApplication app4 = new ApplicationBuilder()
-                .setApplicationType(AdmissionApplication.ApplicationType.INTERNATIONAL_ADMISSION)
-                .setApplicantName("Sophia Chen")
-                .setAcademicInfo(AdmissionApplication.DegreeLevel.BACHELOR, "Cybersecurity", 3.85)
-                .setPassport("E9876543", "China")
-                .setLanguageCertificate("IELTS", 7.5)
-                .build();
-
-        System.out.println("\n4. Custom Direct Fluent API Application");
-        System.out.println("Applicant: " + app4.getApplicantName());
-        System.out.println("Major: " + app4.getMajor() + " (GPA: " + app4.getGpa() + ")");
-        System.out.println("Status: " + app4.getStatus());
     }
 }
