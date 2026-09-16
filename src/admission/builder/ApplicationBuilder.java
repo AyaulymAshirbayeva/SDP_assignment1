@@ -81,7 +81,6 @@ public class ApplicationBuilder implements BuilderInterface {
         return this;
     }
 
-    // Терминальный метод Fluent API с валидацией состояния (Clean Code)
     public AdmissionApplication build() {
         if (type == null || applicantName == null) {
             throw new IllegalStateException("Cannot build application: Application type and Applicant name are required.");

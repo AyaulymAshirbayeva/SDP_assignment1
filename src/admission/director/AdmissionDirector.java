@@ -4,7 +4,6 @@ import admission.builder.BuilderInterface;
 import admission.product.AdmissionApplication;
 
 public class AdmissionDirector {
-
     public AdmissionApplication constructInternationalAdmission(BuilderInterface builder) {
         return builder
                 .setApplicationType(AdmissionApplication.ApplicationType.INTERNATIONAL_ADMISSION)

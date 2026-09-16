@@ -7,7 +7,6 @@ import admission.product.AdmissionApplication;
 public class Main {
     public static void main(String[] args) {
         AdmissionDirector director = new AdmissionDirector();
-
         AdmissionApplication app1 = director.constructInternationalAdmission(new ApplicationBuilder());
 
         System.out.println("1. International admission");
